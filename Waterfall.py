@@ -10,8 +10,8 @@ import plotly.graph_objects as go
 import io
 from openpyxl import Workbook
 
-# --- Password Authentication ---
-PASSWORD = "your_secret_password"
+# --- Step 0: Password Protection ---
+PASSWORD = st.secrets["PASSWORD"]  # Read from secrets.toml
 st.session_state["authenticated"] = st.session_state.get("authenticated", False)
 
 if not st.session_state["authenticated"]:
