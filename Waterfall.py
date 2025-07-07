@@ -10,6 +10,22 @@ import plotly.graph_objects as go
 import io
 from openpyxl import Workbook
 
+# --- Password Authentication ---
+PASSWORD = "your_secret_password"
+st.session_state["authenticated"] = st.session_state.get("authenticated", False)
+
+if not st.session_state["authenticated"]:
+    with st.form("login_form", clear_on_submit=True):
+        password_input = st.text_input("Enter Password", type="password")
+        submitted = st.form_submit_button("Login")
+        if submitted:
+            if password_input == PASSWORD:
+                st.session_state["authenticated"] = True
+                st.success("Access granted!")
+            else:
+                st.error("Incorrect password.")
+    st.stop()
+
 st.set_page_config(page_title="Stacked Waterfall Chart", layout="centered")
 st.title("📊 Stacked Waterfall Chart with Editable Color Codes")
 
