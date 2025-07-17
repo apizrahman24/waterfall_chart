@@ -68,7 +68,11 @@ if "Color" in df_input.columns:
         label = " - ".join([str(row[col]) for col in levels_to_use])
         color_map[label] = row["Color"]
 
-df_input["CustomPath"] = df_input[levels_to_use].agg(" - ".join, axis=1)
+if levels_to_use:
+    df_input["CustomPath"] = df_input[levels_to_use].agg(" - ".join, axis=1)
+else:
+    st.warning("⚠️ Please select at least one level to generate the sunburst chart.")
+    st.stop()
 
 if levels_to_use and value_col:
     fig = px.sunburst(
